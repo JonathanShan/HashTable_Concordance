@@ -22,8 +22,28 @@ class TestList(unittest.TestCase):
        conc = Concordance()
        conc.load_stop_table("stop_words.txt")
        conc.load_concordance_table("declaration.txt")
-       conc.write_concordance("file1_con.txt")
+       conc.write_concordance("declaration_con.txt")
        self.assertTrue(filecmp.cmp("declaration_con.txt", "declaration_sol.txt"))
+
+   def test_04(self):
+       conc = Concordance()
+       self.assertRaises(FileNotFoundError, conc.load_stop_table, "stop_words13.txt")
+       self.assertRaises(FileNotFoundError, conc.load_concordance_table, "stop_words13.txt")
+
+   def test_05(self):
+       conc = Concordance()
+       conc.load_stop_table("empty.txt")
+       conc.load_concordance_table("empty.txt")
+       conc.write_concordance("empty_con.txt")
+       self.assertTrue(filecmp.cmp("empty_con.txt", "empty.txt"))
+
+   def test_06(self):
+       conc = Concordance()
+       conc.load_stop_table("stop_words.txt")
+       conc.load_concordance_table("repeat.txt")
+       conc.write_concordance("repeat_con.txt")
+       self.assertTrue(filecmp.cmp("repeat_con.txt", "repeat_sol.txt"))
+
 
 if __name__ == '__main__':
    unittest.main()
