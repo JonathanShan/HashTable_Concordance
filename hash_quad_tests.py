@@ -125,6 +125,13 @@ class TestList(unittest.TestCase):
         self.assertEqual(hasht.get_value("mouse"), [3,6])
         self.assertEqual(hasht.get_value(""), None)
         self.assertEqual(hasht.get_table_size(), 15)
+        hasht.insert("wajognik")
+        self.assertEqual(hasht.get_index("wajognik"), 3)
+        hasht.insert("wajognikne")
+        self.assertEqual(hasht.get_index("wajognikne"), 4)
+        hasht.insert("wajognikneeeeeeeeeeeeeeee")
+        self.assertEqual(hasht.get_index("wajognikneeeeeeeeeeeeeeee"), 12)
+
         
 
 if __name__ == '__main__':

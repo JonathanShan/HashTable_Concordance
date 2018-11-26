@@ -54,7 +54,6 @@ class Concordance:
         See sample output files for format."""
         file = open(filename, 'w')
         keylist = self.concordance_table.return_all()
-        # print(keylist)
         keylist.sort()
         for key in keylist:
             returnstring = ''
@@ -64,10 +63,3 @@ class Concordance:
                 file.write("\n")
             file.write(key[0] + ":" + returnstring)
         file.close()
-
-
-# c = Concordance()
-# c.load_stop_table('stop_words.txt')
-# c.load_concordance_table('file2.txt')
-# print(c.concordance_table.return_all())
-# c.write_concordance('file2_con.txt')
