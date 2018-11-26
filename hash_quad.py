@@ -33,7 +33,6 @@ class HashTable:
             newSize = self.table_size * 2 + 1
             temphash = [None] * (newSize)
             self.table_size = newSize
-            print(self.table_size)
             for k in self.hash_table:
                 if k != None:
                     i = 0
@@ -49,11 +48,11 @@ class HashTable:
         """ Compute and return an integer from 0 to the (size of the hash table) - 1
         Compute the hash value by using Horner’s rule, as described in project specification."""
         hashval = 0
-        for i in range(len(key)):
-            if i < 8:
-                alpha = ord(key[i].lower())
-                hashval = (hashval*31 + alpha)
-        return hashval % self.table_size
+        minimum = min(len(key), 8)
+        for i in range(0, minimum):
+            alpha = ord(key[i])
+            hashval = (hashval*31 + alpha) % self.table_size
+        return hashval
 
     def in_table(self, key):
         """ Returns True if key is in an entry of the hash table, False otherwise."""
@@ -123,5 +122,4 @@ class HashTable:
         for i in self.hash_table:
             if i != None:
                 returnlist.append(i)
-        #print(returnlist)
         return returnlist

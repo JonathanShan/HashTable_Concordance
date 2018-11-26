@@ -123,7 +123,6 @@ class TestList(unittest.TestCase):
         self.assertEqual(hasht.get_all_keys(), ["hello", "olleh", "gop", "mouse"])
         self.assertEqual(hasht.get_index("ehllo"), None)
         self.assertEqual(hasht.get_value("mouse"), [3,6])
-        self.assertEqual(hasht.get_value(""), None)
         self.assertEqual(hasht.get_table_size(), 15)
         hasht.insert("wajognik")
         self.assertEqual(hasht.get_index("wajognik"), 3)
@@ -131,9 +130,6 @@ class TestList(unittest.TestCase):
         self.assertEqual(hasht.get_index("wajognikne"), 4)
         hasht.insert("wajognikneeeeeeeeeeeeeeee")
         self.assertEqual(hasht.get_index("wajognikneeeeeeeeeeeeeeee"), 12)
-        hasht.insert("asEllo")
-        self.assertTrue(hasht.in_table("asEllo"))
-        self.assertAlmostEqual(hasht.get_load_factor(), 8/31)
 
     def test_06(self):
         hasht = HashTable(191)
@@ -174,14 +170,14 @@ class TestList(unittest.TestCase):
         hasht = HashTable(7)
         hasht.insert("eightletter", 3)
         self.assertEqual(hasht.get_index("eightletter"),3)
-        hasht.insert("eightletter2", 3)
-        self.assertEqual(hasht.get_index("eightletter2"), 4)
-        hasht.insert("eightletter[]", 1)
-        self.assertEqual(hasht.get_index("eightletter[]"), 0)
+        hasht.insert("eightletterfer", 3)
+        self.assertEqual(hasht.get_index("eightletterfer"), 4)
+        hasht.insert("eightletteradaw", 1)
+        self.assertEqual(hasht.get_index("eightletteradaw"), 0)
         hasht.insert("eightletterdf", 5)
-        self.assertEqual(hasht.get_index("eightletter[]"), 14)
+        self.assertEqual(hasht.get_index("eightletteradaw"), 14)
         self.assertEqual(hasht.get_index("eightletter"), 0)
-        self.assertEqual(hasht.get_index("eightletter2"), 3)
+        self.assertEqual(hasht.get_index("eightletterfer"), 3)
         self.assertEqual(hasht.get_index("eightletterdf"), 8)
 
         
