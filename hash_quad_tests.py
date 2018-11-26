@@ -131,6 +131,9 @@ class TestList(unittest.TestCase):
         self.assertEqual(hasht.get_index("wajognikne"), 4)
         hasht.insert("wajognikneeeeeeeeeeeeeeee")
         self.assertEqual(hasht.get_index("wajognikneeeeeeeeeeeeeeee"), 12)
+        hasht.insert("asEllo")
+        self.assertTrue(hasht.in_table("asEllo"))
+        self.assertAlmostEqual(hasht.get_load_factor(), 8/31)
 
         
 
