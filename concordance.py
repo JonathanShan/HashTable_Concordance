@@ -36,9 +36,9 @@ class Concordance:
         linenum = 0
         for line in file:
             for punc in string.punctuation:
-                if punc == '-':
-                    line = line.replace(punc, " ")
-                line = line.replace(punc, "")
+                if punc == "'":
+                    line = line.replace(punc, "")
+                line = line.replace(punc, " ")
             linenum += 1
             words_seen = []
             for word in line.split():

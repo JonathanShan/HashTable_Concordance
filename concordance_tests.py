@@ -44,6 +44,13 @@ class TestList(unittest.TestCase):
        conc.write_concordance("repeat_con.txt")
        self.assertTrue(filecmp.cmp("repeat_con.txt", "repeat_sol.txt"))
 
+   def test_07(self):
+       conc = Concordance()
+       conc.load_stop_table("stop_words.txt")
+       conc.load_concordance_table("random.txt")
+       conc.write_concordance("random_con.txt")
+       self.assertTrue(filecmp.cmp("random_con.txt", "random_sol.txt"))
+
 
 if __name__ == '__main__':
    unittest.main()

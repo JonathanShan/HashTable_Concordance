@@ -1,0 +1,10 @@
+clue: 3
+hello: 4
+random: 3
+randomstuff: 3
+something: 1
+stuff: 3
+sure: 1
+typing: 1
+whaat: 5
+wheere: 5
