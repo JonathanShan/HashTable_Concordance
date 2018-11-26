@@ -33,6 +33,7 @@ class HashTable:
             newSize = self.table_size * 2 + 1
             temphash = [None] * (newSize)
             self.table_size = newSize
+            print(self.table_size)
             for k in self.hash_table:
                 if k != None:
                     i = 0
@@ -51,8 +52,8 @@ class HashTable:
         for i in range(len(key)):
             if i < 8:
                 alpha = ord(key[i].lower())
-                hashval = (hashval*31 + alpha) % self.table_size
-        return hashval
+                hashval = (hashval*31 + alpha)
+        return hashval % self.table_size
 
     def in_table(self, key):
         """ Returns True if key is in an entry of the hash table, False otherwise."""
@@ -124,4 +125,3 @@ class HashTable:
                 returnlist.append(i)
         #print(returnlist)
         return returnlist
-
