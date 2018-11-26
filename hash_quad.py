@@ -14,7 +14,6 @@ class HashTable:
         key’s list of line numbers. If value is not used for a particular hash table (e.g. the stop words hash table),
         can use the default of 0 for value and just call the insert function with the key.
         If load factor is greater than 0.5 after an insertion, hash table size should be increased (doubled + 1)."""
-        key = key.lower()
         hashval = self.horner_hash(key)
         i = 0
         quad = 0
