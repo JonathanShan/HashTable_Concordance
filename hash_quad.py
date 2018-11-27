@@ -15,8 +15,8 @@ class HashTable:
         can use the default of 0 for value and just call the insert function with the key.
         If load factor is greater than 0.5 after an insertion, hash table size should be increased (doubled + 1)."""
         hashval = self.horner_hash(key)
-        i = 1
-        quad = 0
+        quad = 1
+        finhash = hashval
         # if self.in_table(key):
         #     while self.hash_table[(hashval+quad)%self.table_size][0] != key:
         #         i += 1
@@ -38,15 +38,15 @@ class HashTable:
 
         # else:
             
-        while self.hash_table[(hashval+quad)%self.table_size] != None and self.hash_table[(hashval+quad)%self.table_size][0] != key:
-            quad = quad+i
-            i += 2
-        if self.hash_table[(hashval+quad)%self.table_size] == None:
-            self.hash_table[(hashval+quad)%self.table_size] = (key, [value])
+        while self.hash_table[finhash%self.table_size] != None and self.hash_table[finhash%self.table_size][0] != key:
+            finhash += quad
+            quad += 2
+        if self.hash_table[(finhash)%self.table_size] == None:
+            self.hash_table[(finhash)%self.table_size] = (key, [value])
             self.num_items+=1
-        elif self.hash_table[(hashval+quad)%self.table_size][0] == key:
-            if value not in self.hash_table[(hashval+quad)%self.table_size][1]:
-                 self.hash_table[(hashval+quad)%self.table_size][1].append(value)
+        elif self.hash_table[(finhash)%self.table_size][0] == key:
+            if value not in self.hash_table[(finhash)%self.table_size][1]:
+                 self.hash_table[(finhash)%self.table_size][1].append(value)
 
         #implement table doubling
         if self.get_load_factor() > 0.5:
@@ -55,13 +55,13 @@ class HashTable:
             self.table_size = newSize
             for k in self.hash_table:
                 if k != None:
-                    i = 1
-                    quad = 0
                     hashval = self.horner_hash(k[0])
-                    while temphash[(hashval+quad)%self.table_size] != None:
-                        quad = quad+i
-                        i += 2
-                    temphash[(hashval+quad)%self.table_size] = k
+                    quad = 1
+                    finhash = hashval
+                    while temphash[(finhash)%self.table_size] != None:
+                        finhash += quad
+                        quad += 2
+                    temphash[(finhash)%self.table_size] = k
             self.hash_table = temphash
 
 
@@ -79,19 +79,19 @@ class HashTable:
     def in_table(self, key):
         """ Returns True if key is in an entry of the hash table, False otherwise."""
         hashval = self.horner_hash(key)
-        i = 1
-        quad = 0
+        quad = 1
         stop = False
+        finalhash = hashval
         while not stop: 
-            if self.hash_table[(hashval+quad)%self.table_size] == None:
+            if self.hash_table[(finalhash)%self.table_size] == None:
                 stop = True
                 return False
-            elif self.hash_table[(hashval+quad)%self.table_size][0] == key:
+            elif self.hash_table[(finalhash)%self.table_size][0] == key:
                 stop = True
                 return True
             else:
-                quad =quad +i
-                i += 2
+                finalhash += quad
+                quad += 2
 
 
     def get_index(self, key):
@@ -100,16 +100,16 @@ class HashTable:
         hashval = self.horner_hash(key)
         if not self.in_table(key):
             return None
-        i = 1
-        quad = 0
+        quad = 1
+        finalhash = hashval
         stop = False
         while not stop: 
-            if self.hash_table[(hashval+quad)%self.table_size][0] == key:
+            if self.hash_table[(finalhash)%self.table_size][0] == key:
                 stop = True
-                return (hashval+quad)%self.table_size
+                return (finalhash)%self.table_size
             else:
-                quad = quad +i
-                i += 2
+                finalhash += quad
+                quad +=2
 
     def get_all_keys(self):
         """ Returns a Python list of all keys in the hash table."""
@@ -146,3 +146,4 @@ class HashTable:
             if i != None:
                 returnlist.append(i)
         return returnlist
+

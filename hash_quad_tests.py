@@ -204,6 +204,10 @@ class TestList(unittest.TestCase):
         self.assertEqual(hasht.get_index("randomwordererererererererer"), 18)
         hasht.insert("randomworderererererererererer", 1234567)
         self.assertEqual(hasht.get_index("randomworderererererererererer"), 12)
+        hasht.insert("cat", 1)
+        self.assertEqual(hasht.hash_table, [('randomword', [1000]), ('randomworder', [12]), ('randomwordererererer', [122]), ('randomworderererererererer', [123]), 
+            ('randomworderer', [23]), None, ('cat', [1]), None, None, ('randomwordererer', [132]), None, None, ('randomworderererererererererer', [1234567]), 
+            ('randomwordererererererer', [123]), None, None, ('randomworderererer', [79]), None, ('randomwordererererererererer', [12345]), None, None, None, None])
 
         
 
