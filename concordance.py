@@ -32,6 +32,7 @@ class Concordance:
         Starting size of hash table should be 191: self.concordance_table = HashTable(191)
         If file does not exist, raise FileNotFoundError"""
         self.concordance_table = HashTable(191)
+        all_keys = self.stop_table.get_all_keys()
         file = open(filename, 'r')
         linenum = 0
         for line in file:
@@ -43,10 +44,9 @@ class Concordance:
             words_seen = []
             for word in line.split():
                 word = word.lower()
-                if word not in words_seen and word not in self.stop_table.get_all_keys():
-                    if not self.is_num(word):
-                        self.concordance_table.insert(word, linenum)
-                        words_seen.append(word)
+                if word not in words_seen and word not in all_keys and not self.is_num(word):
+                    self.concordance_table.insert(word, linenum)
+                    words_seen.append(word)
         file.close()
 
     def write_concordance(self, filename):

@@ -22,7 +22,6 @@ class TestList(unittest.TestCase):
         self.assertEqual(hasht.get_all_keys(), ["hello", "olleh", "gop", "mouse"])
         self.assertEqual(hasht.get_index("ehllo"), None)
         self.assertEqual(hasht.get_value("mouse"), [3,6])
-        self.assertEqual(hasht.get_value(""), None)
         self.assertEqual(hasht.get_num_items(), 4)
         self.assertEqual(hasht.get_table_size(), 15)
         self.assertEqual(hasht.return_all(), [("hello", [6]), ("olleh", [6, 1234]), ("gop", [1]), ("mouse", [3, 6])])

@@ -17,26 +17,6 @@ class HashTable:
         hashval = self.horner_hash(key)
         quad = 1
         finhash = hashval
-        # if self.in_table(key):
-        #     while self.hash_table[(hashval+quad)%self.table_size][0] != key:
-        #         i += 1
-        #         quad = i ** 2
-        #     if value not in self.hash_table[(hashval+quad)%self.table_size][1]:
-        #         self.hash_table[(hashval+quad)%self.table_size][1].append(value)
-        # else:
-        #     while self.hash_table[(hashval+quad)%self.table_size] != None:
-        #         i += 1
-        #         quad = i**2
-        #     self.hash_table[(hashval+quad)%self.table_size] = (key, [value])
-        #     self.num_items += 1
-        # if self.hash_table[hashval%self.table_size][0] == key:
-        #     if value not in self.hash_table[hashval%self.table_size][1]:
-        #         self.hash_table[hashval%self.table_size][1].append(value)
-
-        # elif self.hash_table[hashval][0] == None:
-        #     self.hash_table[hashval][0] = (key, [value]):
-
-        # else:
             
         while self.hash_table[finhash%self.table_size] != None and self.hash_table[finhash%self.table_size][0] != key:
             finhash += quad
@@ -45,7 +25,7 @@ class HashTable:
             self.hash_table[(finhash)%self.table_size] = (key, [value])
             self.num_items+=1
         elif self.hash_table[(finhash)%self.table_size][0] == key:
-            if value not in self.hash_table[(finhash)%self.table_size][1]:
+            if value > self.hash_table[(finhash)%self.table_size][1][len(self.hash_table[(finhash)%self.table_size][1])-1]:
                  self.hash_table[(finhash)%self.table_size][1].append(value)
 
         #implement table doubling

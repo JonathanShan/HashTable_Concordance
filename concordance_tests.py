@@ -58,6 +58,27 @@ class TestList(unittest.TestCase):
        conc.write_concordance("wrap_con.txt")
        self.assertTrue(filecmp.cmp("wrap_con.txt", "wrap_sol.txt"))
 
+   # def test_09(self):
+   #     conc = Concordance()
+   #     conc.load_stop_table("stop_words.txt")
+   #     conc.load_concordance_table("weirf.txt")
+   #     conc.write_concordance("weirf_con.txt")
+   #     self.assertTrue(filecmp.cmp("weirf_con.txt", "weirf_sol.txt"))
+
+   # def test_10(self):
+   #     conc = Concordance()
+   #     conc.load_stop_table("stop_words.txt")
+   #     conc.load_concordance_table("w_and_p.txt")
+   #     conc.write_concordance("w_and_p_con.txt")
+   #     self.assertTrue(filecmp.cmp("w_and_p_con.txt", "w_and_p_sol.txt"))
+
+   # def test_11(self):
+   #     conc = Concordance()
+   #     conc.load_stop_table("stop_words2.txt")
+   #     conc.load_concordance_table("the.txt")
+   #     conc.write_concordance("the_con.txt")
+   #     self.assertTrue(filecmp.cmp("the_con.txt", "the_sol.txt"))
+
 
 if __name__ == '__main__':
    unittest.main()
