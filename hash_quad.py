@@ -15,19 +15,39 @@ class HashTable:
         can use the default of 0 for value and just call the insert function with the key.
         If load factor is greater than 0.5 after an insertion, hash table size should be increased (doubled + 1)."""
         hashval = self.horner_hash(key)
-        i = 0
+        i = 1
         quad = 0
-        if self.in_table(key):
-            while self.hash_table[(hashval+quad)%self.table_size][0] != key:
-                i += 1
-                quad = i ** 2
-            self.hash_table[(hashval+quad)%self.table_size][1].append(value)
-        else:
-            while self.hash_table[(hashval+quad)%self.table_size] != None:
-                i += 1
-                quad = i**2
+        # if self.in_table(key):
+        #     while self.hash_table[(hashval+quad)%self.table_size][0] != key:
+        #         i += 1
+        #         quad = i ** 2
+        #     if value not in self.hash_table[(hashval+quad)%self.table_size][1]:
+        #         self.hash_table[(hashval+quad)%self.table_size][1].append(value)
+        # else:
+        #     while self.hash_table[(hashval+quad)%self.table_size] != None:
+        #         i += 1
+        #         quad = i**2
+        #     self.hash_table[(hashval+quad)%self.table_size] = (key, [value])
+        #     self.num_items += 1
+        # if self.hash_table[hashval%self.table_size][0] == key:
+        #     if value not in self.hash_table[hashval%self.table_size][1]:
+        #         self.hash_table[hashval%self.table_size][1].append(value)
+
+        # elif self.hash_table[hashval][0] == None:
+        #     self.hash_table[hashval][0] = (key, [value]):
+
+        # else:
+            
+        while self.hash_table[(hashval+quad)%self.table_size] != None and self.hash_table[(hashval+quad)%self.table_size][0] != key:
+            quad = quad+i
+            i += 2
+        if self.hash_table[(hashval+quad)%self.table_size] == None:
             self.hash_table[(hashval+quad)%self.table_size] = (key, [value])
-            self.num_items += 1
+            self.num_items+=1
+        elif self.hash_table[(hashval+quad)%self.table_size][0] == key:
+            if value not in self.hash_table[(hashval+quad)%self.table_size][1]:
+                 self.hash_table[(hashval+quad)%self.table_size][1].append(value)
+
         #implement table doubling
         if self.get_load_factor() > 0.5:
             newSize = self.table_size * 2 + 1
@@ -35,14 +55,15 @@ class HashTable:
             self.table_size = newSize
             for k in self.hash_table:
                 if k != None:
-                    i = 0
+                    i = 1
                     quad = 0
                     hashval = self.horner_hash(k[0])
                     while temphash[(hashval+quad)%self.table_size] != None:
-                        i += 1
-                        quad = i**2
+                        quad = quad+i
+                        i += 2
                     temphash[(hashval+quad)%self.table_size] = k
             self.hash_table = temphash
+
 
     def horner_hash(self, key):
         """ Compute and return an integer from 0 to the (size of the hash table) - 1
@@ -51,13 +72,14 @@ class HashTable:
         minimum = min(len(key), 8)
         for i in range(0, minimum):
             alpha = ord(key[i])
-            hashval = (hashval*31 + alpha) % self.table_size
-        return hashval
+            increment = alpha * 31 ** (minimum-1-i)
+            hashval += increment
+        return hashval % self.table_size
 
     def in_table(self, key):
         """ Returns True if key is in an entry of the hash table, False otherwise."""
         hashval = self.horner_hash(key)
-        i = 0
+        i = 1
         quad = 0
         stop = False
         while not stop: 
@@ -68,8 +90,9 @@ class HashTable:
                 stop = True
                 return True
             else:
-                i += 1
-                quad = i ** 2
+                quad =quad +i
+                i += 2
+
 
     def get_index(self, key):
         """ Returns the index of the hash table entry containing the provided key. 
@@ -77,7 +100,7 @@ class HashTable:
         hashval = self.horner_hash(key)
         if not self.in_table(key):
             return None
-        i = 0
+        i = 1
         quad = 0
         stop = False
         while not stop: 
@@ -85,8 +108,8 @@ class HashTable:
                 stop = True
                 return (hashval+quad)%self.table_size
             else:
-                i += 1
-                quad = i ** 2
+                quad = quad +i
+                i += 2
 
     def get_all_keys(self):
         """ Returns a Python list of all keys in the hash table."""

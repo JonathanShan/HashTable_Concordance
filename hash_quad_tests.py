@@ -179,6 +179,31 @@ class TestList(unittest.TestCase):
         self.assertEqual(hasht.get_index("eightletter"), 0)
         self.assertEqual(hasht.get_index("eightletterfer"), 3)
         self.assertEqual(hasht.get_index("eightletterdf"), 8)
+        self.assertTrue(hasht.in_table("eightletter"))
+        self.assertFalse(hasht.in_table("eightletteradawad"))
+
+    def test_08(self):
+        hasht = HashTable(23)
+        hasht.insert("randomword", 1000)
+        self.assertEqual(hasht.get_index("randomword"), 0)
+        hasht.insert("randomworder", 12)
+        hasht.insert("randomworderer", 23)
+        hasht.insert("randomwordererer", 132)
+        hasht.insert("randomworderererer", 79)
+        self.assertEqual(hasht.get_index("randomworder"), 1)
+        self.assertEqual(hasht.get_index("randomworderer"), 4)
+        self.assertEqual(hasht.get_index("randomwordererer"), 9)
+        self.assertEqual(hasht.get_index("randomworderererer"), 16)
+        hasht.insert("randomwordererererer", 122)
+        self.assertEqual(hasht.get_index("randomwordererererer"), 2)
+        hasht.insert("randomwordererererererer", 123)
+        self.assertEqual(hasht.get_index("randomwordererererererer"), 13)
+        hasht.insert("randomworderererererererer", 123)
+        self.assertEqual(hasht.get_index("randomworderererererererer"), 3)
+        hasht.insert("randomwordererererererererer", 12345)
+        self.assertEqual(hasht.get_index("randomwordererererererererer"), 18)
+        hasht.insert("randomworderererererererererer", 1234567)
+        self.assertEqual(hasht.get_index("randomworderererererererererer"), 12)
 
         
 
